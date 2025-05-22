@@ -5,7 +5,7 @@ body {
   background-color: #010101;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, p, label {
   color: white;
 }
 
@@ -16,4 +16,21 @@ h1, h2, h3, p {
   gap: 5px;
   justify-content: center;
   margin: 20px auto;
+}
+
+.board div {
+  width: 100px;
+  height: 100px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #333;
+  background-color: #0e12e9;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.board div:hover {
+  background-color: #fefefe;
 }
