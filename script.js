@@ -29,6 +29,10 @@ function handleCellClick(event) {
   const cell = event.target;
 
   if (board[index]) return;
+  if (index === lastVanishedCell[currentPlayer]) {
+    alert("You can't place on the cell where your last emoji vanished.");
+    return;
+  }
 
   // TODO: Block reuse of vanished cell
 
