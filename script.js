@@ -21,3 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
 function startGame() {
   alert('Game starting...');
 }
+
+function handleCellClick(event) {
+  if (!gameActive) return;
+
+  const index = parseInt(event.target.dataset.index);
+  const cell = event.target;
+
+  if (board[index]) return;
+
+  // TODO: Block reuse of vanished cell
+
+  if (turnHistory[currentPlayer].length === 3) {
+    const oldest = turnHistory[currentPlayer].shift();
+    lastVanishedCell[currentPlayer] = oldest.index;
+    board[oldest.index] = null;
+    document.querySelector(`[data-index='${oldest.index}']`).textContent = '';
+  }
+
+  const emoji = selectedEmojis[currentPlayer];
+  board[index] = { player: currentPlayer, emoji };
+  cell.textContent = emoji;
+  turnHistory[currentPlayer].push({ index, emoji });
+
+  currentPlayer = currentPlayer === 1 ? 2 : 1;
+  document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+}
