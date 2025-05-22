@@ -8,3 +8,12 @@ body {
 h1, h2, h3, p {
   color: white;
 }
+
+/* The 3X3 board layout */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 5px;
+  justify-content: center;
+  margin: 20px auto;
+}
