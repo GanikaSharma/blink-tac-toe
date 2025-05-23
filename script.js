@@ -82,7 +82,8 @@ function startGame() {
   document.getElementById('exit-btn').style.display = 'inline-block';
   document.getElementById('message').textContent = '';
   document.getElementById('restart-btn').style.display = 'none';
-  document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+  document.getElementById('turn-player').textContent = currentPlayer;
+  document.getElementById('turn-emoji').textContent = selectedEmojis[currentPlayer];
 
   generateBoard();
 }
@@ -182,7 +183,8 @@ function handleCellClick(event) {
 
 
   currentPlayer = currentPlayer === 1 ? 2 : 1;
-  document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+  document.getElementById('turn-player').textContent = currentPlayer;
+  document.getElementById('turn-emoji').textContent = selectedEmojis[currentPlayer];
 }
 
 function checkWinner(player) {
