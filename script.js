@@ -98,7 +98,7 @@ function handleCellClick(event) {
       winningCell.classList.add("winning-cell");
     });
     document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
-    document.getElementById("message").style.color = currentPlayer === 1 ? "#00ffcc" : "#ff99cc";
+    document.getElementById("message").style.color = currentPlayer === 1 ? "#00ffcc" : "#00ffcc";
     gameActive = false;
     document.getElementById("restart-btn").style.display = 'block';
     return;
