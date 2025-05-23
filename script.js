@@ -4,6 +4,13 @@ const categories = {
   Sports: ['⚽', '🏀', '🏈', '🎾']
 };
 
+let board = Array(9).fill(null);
+let currentPlayer = 1;
+let turnHistory = { 1: [], 2: [] };
+let selectedEmojis = { 1: null, 2: null };
+let lastVanishedCell = { 1: null, 2: null };
+let gameActive = false;
+
 document.addEventListener('DOMContentLoaded', () => {
   const player1Select = document.getElementById('player1-category');
   const player2Select = document.getElementById('player2-category');
@@ -16,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   startBtn.addEventListener('click', startGame);
+  document.getElementById('restart-btn').addEventListener('click', restartGame);
 });
 
 function startGame() {
@@ -45,6 +53,18 @@ function startGame() {
   generateBoard();
 }
 
+function generateBoard() {
+  const boardDiv = document.getElementById('board');
+  boardDiv.innerHTML = '';
+
+  for (let i = 0; i < 9; i++) {
+    const cell = document.createElement('div');
+    cell.dataset.index = i;
+    cell.addEventListener('click', handleCellClick);
+    boardDiv.appendChild(cell);
+  }
+}
+
 function handleCellClick(event) {
   if (!gameActive) return;
 
@@ -58,8 +78,6 @@ function handleCellClick(event) {
     return;
   }
 
-  // TODO: Block reuse of vanished cell
-
   if (turnHistory[currentPlayer].length === 3) {
     const oldest = turnHistory[currentPlayer].shift();
     lastVanishedCell[currentPlayer] = oldest.index;
@@ -72,10 +90,31 @@ function handleCellClick(event) {
   cell.textContent = emoji;
   turnHistory[currentPlayer].push({ index, emoji });
 
+  if (checkWinner(currentPlayer)) {
+    document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
+    gameActive = false;
+    document.getElementById("restart-btn").style.display = 'block';
+    return;
+  }
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
 }
 
+function checkWinner(player) {
+  const playerCells = board
+    .map((val, idx) => (val && val.player === player ? idx : null))
+    .filter(idx => idx !== null);
+
+  const winningCombos = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+    [0, 4, 8], [2, 4, 6]           // diagonals
+  ];
+
+  return winningCombos.some(combo =>
+    combo.every(i => playerCells.includes(i))
+  );
+}
 function restartGame() {
   board = Array(9).fill(null);
   gameActive = true;
