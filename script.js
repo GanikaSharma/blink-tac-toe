@@ -27,6 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
     player1Select.add(option.cloneNode(true));
     player2Select.add(option.cloneNode(true));
   }
+  document.getElementById('view-stats').addEventListener('click', () => {
+    document.getElementById('category-selection').style.display = 'none';
+    document.getElementById('stats-section').style.display = 'block';
+  });
+  
+  document.getElementById('back-to-menu').addEventListener('click', () => {
+    document.getElementById('stats-section').style.display = 'none';
+    document.getElementById('category-selection').style.display = 'block';
+  });
 
   startBtn.addEventListener('click', startGame);
   document.getElementById('restart-btn').addEventListener('click', restartGame);
