@@ -135,3 +135,10 @@ select:focus {
   line-height: 1.5;
   font-style: italic;
 }
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}

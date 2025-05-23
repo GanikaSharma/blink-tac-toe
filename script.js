@@ -49,6 +49,7 @@ function startGame() {
 
   document.getElementById('category-selection').style.display = 'none';
   document.getElementById('game-section').style.display = 'block';
+  document.getElementById('exit-btn').style.display = 'inline-block';
   document.getElementById('message').textContent = '';
   document.getElementById('restart-btn').style.display = 'none';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
@@ -103,6 +104,7 @@ function handleCellClick(event) {
     document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
     document.getElementById("message").style.color = currentPlayer === 1 ? "#00ffcc" : "#00ffcc";
     gameActive = false;
+    document.getElementById('exit-btn').style.display = 'none';
     document.getElementById("restart-btn").style.display = 'block';
     return;
   }
@@ -140,6 +142,7 @@ function restartGame() {
   // Hide game UI and show category selection
   document.getElementById('game-section').style.display = 'none';
   document.getElementById('category-selection').style.display = 'block';
+  document.getElementById('exit-btn').style.display = 'none';
 
   // Optional: Reset category dropdowns
   document.getElementById('player1-category').selectedIndex = 0;
@@ -149,4 +152,22 @@ function restartGame() {
   document.getElementById('message').textContent = '';
   document.getElementById('restart-btn').style.display = 'none';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+}
+
+function exitGame() {
+  const confirmExit = confirm("⚠️ Are you sure you want to abandon the battlefield?\n\nOptions:\n👀 'No, I fight on!'\n🫡 'Yes, I surrender...'\n🌀 'Let fate decide!'");
+
+  if (confirmExit) {
+    gameActive = false;
+    board = Array(9).fill(null);
+
+    document.getElementById('game-section').style.display = 'none';
+    document.getElementById('category-selection').style.display = 'block';
+
+    document.getElementById('player1-category').selectedIndex = 0;
+    document.getElementById('player2-category').selectedIndex = 0;
+    document.getElementById('message').textContent = '';
+    document.getElementById('restart-btn').style.display = 'none';
+    document.getElementById('exit-btn').style.display = 'none';
+  }
 }
