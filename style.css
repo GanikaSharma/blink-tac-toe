@@ -42,10 +42,22 @@ h1, h2, h3, p, label {
   margin-bottom: 10px;
 }
 
-#restart-btn {
-  margin-top: 15px;
-  padding: 8px 16px;
+button {
+  background-color: #0e76ec;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #1a8cff;
+  box-shadow: 0 0 12px rgba(26, 140, 255, 0.8);
 }
 
 .winning-cell {
