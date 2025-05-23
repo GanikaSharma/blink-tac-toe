@@ -204,3 +204,11 @@ select:focus {
     opacity: 0;
   }
 }
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}

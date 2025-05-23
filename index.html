@@ -31,7 +31,10 @@
           </select>
         </label>
       </div>
-      <button id="start-game">Start Game</button>
+      <div class="menu-buttons">
+        <button id="start-game">Start Game</button>
+        <button id="view-stats">📊 Stats</button>
+      </div>
     </section>
 
     <section id="game-section" style="display: none">
@@ -60,7 +63,27 @@
         win!
       </p>
     </section>
-
+    <!-- STATS SECTION -->
+    <section id="stats-section" style="display: none">
+      <h2>🏅 Emoji Win Stats</h2>
+      <table
+        id="stats-table"
+        border="1"
+        style="margin: auto; background: #fff; color: #000"
+      >
+        <thead>
+          <tr>
+            <th>Emoji</th>
+            <th>Wins</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- rows will be added dynamically -->
+        </tbody>
+      </table>
+      <br />
+      <button id="back-to-menu">🔙 Back</button>
+    </section>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <!-- 🎵 Sound Effects -->
