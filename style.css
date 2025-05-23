@@ -172,3 +172,35 @@ select:focus {
   color: #ffffff;
   margin-bottom: 10px;
 }
+
+/* When emoji appears */
+.emoji-pop {
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* When emoji vanishes */
+.emoji-vanish {
+  animation: vanishOut 0.3s ease-out;
+}
+
+@keyframes vanishOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}

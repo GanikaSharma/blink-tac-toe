@@ -116,13 +116,23 @@ function handleCellClick(event) {
   if (turnHistory[currentPlayer].length === 3) {
     const oldest = turnHistory[currentPlayer].shift();
     lastVanishedCell[currentPlayer] = oldest.index;
-    board[oldest.index] = null;
-    document.querySelector(`[data-index='${oldest.index}']`).textContent = '';
+    const oldCell = document.querySelector(`[data-index='${oldest.index}']`);
+    oldCell.classList.add('emoji-vanish');
+
+    setTimeout(() => {
+      board[oldest.index] = null;
+      oldCell.textContent = '';
+      oldCell.classList.remove('emoji-vanish');
+    }, 250);
+
   }
 
   const emoji = selectedEmojis[currentPlayer];
   board[index] = { player: currentPlayer, emoji };
   cell.textContent = emoji;
+  cell.classList.add('emoji-pop');
+  setTimeout(() => cell.classList.remove('emoji-pop'), 300);
+
   document.getElementById(`player${currentPlayer}-sound`).play();
   turnHistory[currentPlayer].push({ index, emoji });
 
