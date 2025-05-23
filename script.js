@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   startBtn.addEventListener('click', startGame);
   document.getElementById('restart-btn').addEventListener('click', restartGame);
+  document.getElementById('exit-btn').addEventListener('click', exitGame);
 });
 
 function startGame() {
