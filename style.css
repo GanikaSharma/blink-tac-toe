@@ -142,3 +142,33 @@ select:focus {
   gap: 15px;
   margin-top: 20px;
 }
+
+#match-mode {
+  margin: 20px 0;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#match-mode select {
+  background-color: #1c1c1c;
+  color: white;
+  padding: 6px 12px;
+  border: 2px solid #444;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-left: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+#match-mode select:hover {
+  border-color: #1a8cff;
+}
+
+#scoreboard {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}

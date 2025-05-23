@@ -22,11 +22,24 @@
           <select id="player2-category"></select>
         </label>
       </div>
+      <div id="match-mode" style="margin-top: 15px">
+        <label>
+          Match Type:
+          <select id="mode-select">
+            <option value="single">Single Match</option>
+            <option value="best3">Best of 3</option>
+          </select>
+        </label>
+      </div>
       <button id="start-game">Start Game</button>
     </section>
 
     <section id="game-section" style="display: none">
       <h2 id="turn-indicator">Player 1's Turn</h2>
+      <div id="scoreboard" style="margin-bottom: 10px">
+        <span>Player 1 Score: <span id="score1">0</span></span> |
+        <span>Player 2 Score: <span id="score2">0</span></span>
+      </div>
       <div id="board" class="board"></div>
       <div id="message"></div>
 
