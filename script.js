@@ -31,6 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
   startBtn.addEventListener('click', startGame);
   document.getElementById('restart-btn').addEventListener('click', restartGame);
   document.getElementById('exit-btn').addEventListener('click', exitGame);
+
+  // Button click sound
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const click = document.getElementById('click-sound');
+      click.currentTime = 0;
+      click.play();
+    });
+  });
+
+
+  // Dropdown selection sound
+  document.querySelectorAll('select').forEach(select => {
+    select.addEventListener('change', () => {
+      const selectSound = document.getElementById('select-sound');
+      selectSound.currentTime = 0;
+      selectSound.play();
+    });
+  });
 });
 
 function startGame() {
