@@ -133,9 +133,16 @@ function restartGame() {
   turnHistory = { 1: [], 2: [] };
   lastVanishedCell = { 1: null, 2: null };
 
+  // Hide game UI and show category selection
+  document.getElementById('game-section').style.display = 'none';
+  document.getElementById('category-selection').style.display = 'block';
+
+  // Optional: Reset category dropdowns
+  document.getElementById('player1-category').selectedIndex = 0;
+  document.getElementById('player2-category').selectedIndex = 0;
+
+  // Reset UI elements
   document.getElementById('message').textContent = '';
   document.getElementById('restart-btn').style.display = 'none';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
-
-  generateBoard();
 }
