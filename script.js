@@ -104,6 +104,7 @@ function handleCellClick(event) {
   const emoji = selectedEmojis[currentPlayer];
   board[index] = { player: currentPlayer, emoji };
   cell.textContent = emoji;
+  document.getElementById(`player${currentPlayer}-sound`).play();
   turnHistory[currentPlayer].push({ index, emoji });
 
   const winningCombo = checkWinner(currentPlayer);
@@ -124,17 +125,19 @@ function handleCellClick(event) {
     roundsPlayed++;
 
     if (mode === 'single') {
-  declareMatchWinner(currentPlayer);
-} else if (mode === 'best3' && roundsPlayed === 3) {
-  const winner = score[1] > score[2] ? 1 : 2;
-  declareMatchWinner(winner);
-} else {
-  setTimeout(restartBoardOnly, 1000);
-}
+      declareMatchWinner(currentPlayer);
+    } else if (mode === 'best3' && roundsPlayed === 3) {
+      const winner = score[1] > score[2] ? 1 : 2;
+      declareMatchWinner(winner);
+    } else {
+      setTimeout(restartBoardOnly, 1000);
+    }
 
     gameActive = false;
     document.getElementById("restart-btn").style.display = 'block';
     document.getElementById("exit-btn").style.display = 'none';
+    document.getElementById('win-sound').currentTime = 0;
+    document.getElementById('win-sound').play();
 
     // Confetti
     setTimeout(() => {
