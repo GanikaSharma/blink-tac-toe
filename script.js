@@ -19,7 +19,30 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-  alert('Game starting...');
+  const cat1 = document.getElementById('player1-category').value;
+  const cat2 = document.getElementById('player2-category').value;
+
+  if (cat1 === cat2) {
+    alert('Choose different categories for each player!');
+    return;
+  }
+
+  selectedEmojis[1] = categories[cat1][Math.floor(Math.random() * categories[cat1].length)];
+  selectedEmojis[2] = categories[cat2][Math.floor(Math.random() * categories[cat2].length)];
+
+  board = Array(9).fill(null);
+  currentPlayer = 1;
+  turnHistory = { 1: [], 2: [] };
+  lastVanishedCell = { 1: null, 2: null };
+  gameActive = true;
+
+  document.getElementById('category-selection').style.display = 'none';
+  document.getElementById('game-section').style.display = 'block';
+  document.getElementById('message').textContent = '';
+  document.getElementById('restart-btn').style.display = 'none';
+  document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+
+  generateBoard();
 }
 
 function handleCellClick(event) {
@@ -29,6 +52,7 @@ function handleCellClick(event) {
   const cell = event.target;
 
   if (board[index]) return;
+
   if (index === lastVanishedCell[currentPlayer]) {
     alert("You can't place on the cell where your last emoji vanished.");
     return;
@@ -58,7 +82,7 @@ function restartGame() {
   currentPlayer = 1;
   turnHistory = { 1: [], 2: [] };
   lastVanishedCell = { 1: null, 2: null };
-  
+
   document.getElementById('message').textContent = '';
   document.getElementById('restart-btn').style.display = 'none';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
