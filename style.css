@@ -83,9 +83,27 @@ button:hover {
   box-shadow: 0 0 12px rgba(26, 140, 255, 0.8);
 }
 
+#rules-section {
+  color: white;
+  max-width: 600px;
+  margin: auto;
+  padding-top: 20px;
+  line-height: 1.6;
+  font-style: italic;
+  text-align: center;
+}
+
 #restart-btn {
   display: block;
   margin: 20px auto 0;
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 select {

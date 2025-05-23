@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Select.add(option.cloneNode(true));
   }
   document.getElementById('view-stats').addEventListener('click', () => {
-    renderStatsTable(); 
+    renderStatsTable();
     document.getElementById('category-selection').style.display = 'none';
     document.getElementById('stats-section').style.display = 'block';
   });
@@ -42,6 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
   startBtn.addEventListener('click', startGame);
   document.getElementById('restart-btn').addEventListener('click', restartGame);
   document.getElementById('exit-btn').addEventListener('click', exitGame);
+
+  //help button
+  document.getElementById('help-btn').addEventListener('click', () => {
+    document.getElementById('category-selection').style.display = 'none';
+    document.getElementById('rules-section').style.display = 'block';
+  });
+
+  document.getElementById('exit-help').addEventListener('click', () => {
+    document.getElementById('rules-section').style.display = 'none';
+    document.getElementById('category-selection').style.display = 'block';
+  });
 
   // Button click sound
   document.querySelectorAll('button').forEach(btn => {
@@ -270,7 +281,7 @@ function declareMatchWinner(winner) {
   } else {
     emojiWinStats[emoji] = 1;
   }
-  
+
   setTimeout(() => {
     alert(`🏆 Player ${winner} wins the match!`);
     resetToCategorySelection();

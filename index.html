@@ -34,8 +34,8 @@
       <div class="menu-buttons">
         <button id="start-game">Start Game</button>
         <button id="view-stats">📊 Stats</button>
+        <button id="help-btn">📘 Help</button>
       </div>
-      
     </section>
 
     <section id="game-section" style="display: none">
@@ -56,22 +56,26 @@
       </div>
     </section>
 
-    <section id="help">
-      <h3>Help</h3>
+    <!-- Rules Section (separate page) -->
+    <section id="rules-section" style="display: none">
+      <h2>📘 How to Play</h2>
       <p id="instructions">
-        Choose a category. Take turns placing emojis. You can only have 3 on
-        board. The oldest disappears when placing a 4th. Make a line of 3 to
-        win!
+        Choose a category. Take turns placing emojis. You can only have 3 on the
+        board. The oldest disappears when placing a 4th. Make a line of 3 emojis
+        to win!
       </p>
+      <br />
+      <button id="exit-help">🔙 Back to Menu</button>
     </section>
-    
+
     <!-- STATS SECTION -->
     <section id="stats-section" style="display: none">
       <h2>🏅 Emoji Win Stats</h2>
       <table
         id="stats-table"
         border="1"
-        style="margin: auto; background: #fff; color: #000">
+        style="margin: auto; background: #fff; color: #000"
+      >
         <thead>
           <tr>
             <th>Emoji</th>
