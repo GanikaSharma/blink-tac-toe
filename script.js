@@ -60,6 +60,7 @@ function generateBoard() {
   for (let i = 0; i < 9; i++) {
     const cell = document.createElement('div');
     cell.dataset.index = i;
+    cell.classList.remove("winning-cell");
     cell.addEventListener('click', handleCellClick);
     boardDiv.appendChild(cell);
   }
@@ -90,12 +91,18 @@ function handleCellClick(event) {
   cell.textContent = emoji;
   turnHistory[currentPlayer].push({ index, emoji });
 
-  if (checkWinner(currentPlayer)) {
+  const winningCombo = checkWinner(currentPlayer);
+  if (winningCombo) {
+    winningCombo.forEach(i => {
+      const winningCell = document.querySelector(`[data-index='${i}']`);
+      winningCell.classList.add("winning-cell");
+    });
     document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
     gameActive = false;
     document.getElementById("restart-btn").style.display = 'block';
     return;
   }
+
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
 }
@@ -111,9 +118,13 @@ function checkWinner(player) {
     [0, 4, 8], [2, 4, 6]           // diagonals
   ];
 
-  return winningCombos.some(combo =>
-    combo.every(i => playerCells.includes(i))
-  );
+  for (let combo of winningCombos) {
+    if (combo.every(i => playerCells.includes(i))) {
+      return combo; // return the winning cells
+    }
+  }
+
+  return null;
 }
 function restartGame() {
   board = Array(9).fill(null);
@@ -128,4 +139,3 @@ function restartGame() {
 
   generateBoard();
 }
-
