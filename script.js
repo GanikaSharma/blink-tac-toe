@@ -13,6 +13,9 @@ let turnHistory = { 1: [], 2: [] };
 let selectedEmojis = { 1: null, 2: null };
 let lastVanishedCell = { 1: null, 2: null };
 let gameActive = false;
+let mode = 'single';
+let score = { 1: 0, 2: 0 };
+let roundsPlayed = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
   const player1Select = document.getElementById('player1-category');
@@ -33,6 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function startGame() {
   const cat1 = document.getElementById('player1-category').value;
   const cat2 = document.getElementById('player2-category').value;
+
+  mode = document.getElementById('mode-select').value;
+  score = { 1: 0, 2: 0 };
+  roundsPlayed = 0;
+  document.getElementById('score1').textContent = 0;
+  document.getElementById('score2').textContent = 0;
+
 
   if (cat1 === cat2) {
     alert('Choose different categories for each player!');
@@ -97,26 +107,51 @@ function handleCellClick(event) {
   turnHistory[currentPlayer].push({ index, emoji });
 
   const winningCombo = checkWinner(currentPlayer);
+
   if (winningCombo) {
     winningCombo.forEach(i => {
       const winningCell = document.querySelector(`[data-index='${i}']`);
       winningCell.classList.add("winning-cell");
     });
-    document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
-    document.getElementById("message").style.color = currentPlayer === 1 ? "#00ffcc" : "#00ffcc";
-    gameActive = false;
-    document.getElementById('exit-btn').style.display = 'none';
-    document.getElementById("restart-btn").style.display = 'block';
 
-    // 🎉 Confetti celebration!
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+    // Show winner message
+    document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
+    document.getElementById("message").style.color = "#00ffcc";
+
+    // Update score
+    score[currentPlayer]++;
+    document.getElementById(`score${currentPlayer}`).textContent = score[currentPlayer];
+    roundsPlayed++;
+
+    if (mode === 'single' || score[currentPlayer] === 2) {
+      // Match over
+      setTimeout(() => {
+        alert(`🏆 Player ${currentPlayer} wins the match!`);
+        resetToCategorySelection();
+      }, 300);
+    } else {
+      // Best of 3 — play next round
+      setTimeout(() => {
+        restartBoardOnly();
+      }, 1000);
+    }
+
+    gameActive = false;
+    document.getElementById("restart-btn").style.display = 'block';
+    document.getElementById("exit-btn").style.display = 'none';
+
+    // Confetti
+    setTimeout(() => {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    }, 100);
 
     return;
   }
+
 
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
@@ -179,4 +214,17 @@ function exitGame() {
     document.getElementById('restart-btn').style.display = 'none';
     document.getElementById('exit-btn').style.display = 'none';
   }
+}
+
+function restartBoardOnly() {
+  board = Array(9).fill(null);
+  turnHistory = { 1: [], 2: [] };
+  lastVanishedCell = { 1: null, 2: null };
+  gameActive = true;
+  currentPlayer = 1;
+  document.getElementById('message').textContent = '';
+  document.getElementById('restart-btn').style.display = 'none';
+  document.getElementById('exit-btn').style.display = 'inline-block';
+  document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+  generateBoard();
 }
