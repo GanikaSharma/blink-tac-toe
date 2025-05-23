@@ -123,18 +123,14 @@ function handleCellClick(event) {
     document.getElementById(`score${currentPlayer}`).textContent = score[currentPlayer];
     roundsPlayed++;
 
-    if (mode === 'single' || score[currentPlayer] === 2) {
-      // Match over
-      setTimeout(() => {
-        alert(`🏆 Player ${currentPlayer} wins the match!`);
-        resetToCategorySelection();
-      }, 300);
-    } else {
-      // Best of 3 — play next round
-      setTimeout(() => {
-        restartBoardOnly();
-      }, 1000);
-    }
+    if (mode === 'single') {
+  declareMatchWinner(currentPlayer);
+} else if (mode === 'best3' && roundsPlayed === 3) {
+  const winner = score[1] > score[2] ? 1 : 2;
+  declareMatchWinner(winner);
+} else {
+  setTimeout(restartBoardOnly, 1000);
+}
 
     gameActive = false;
     document.getElementById("restart-btn").style.display = 'block';
@@ -227,4 +223,11 @@ function restartBoardOnly() {
   document.getElementById('exit-btn').style.display = 'inline-block';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
   generateBoard();
+}
+
+function declareMatchWinner(winner) {
+  setTimeout(() => {
+    alert(`🏆 Player ${winner} wins the match!`);
+    resetToCategorySelection();
+  }, 300);
 }
