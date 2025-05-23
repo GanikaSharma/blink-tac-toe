@@ -51,3 +51,10 @@ function handleCellClick(event) {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
 }
+
+function restartGame() {
+  board = Array(9).fill(null);
+  gameActive = true;
+  generateBoard();
+  // TODO: Reset currentPlayer, message, vanished cells, and turnHistory
+}
