@@ -55,6 +55,14 @@ function handleCellClick(event) {
 function restartGame() {
   board = Array(9).fill(null);
   gameActive = true;
+  currentPlayer = 1;
+  turnHistory = { 1: [], 2: [] };
+  lastVanishedCell = { 1: null, 2: null };
+  
+  document.getElementById('message').textContent = '';
+  document.getElementById('restart-btn').style.display = 'none';
+  document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+
   generateBoard();
-  // TODO: Reset currentPlayer, message, vanished cells, and turnHistory
 }
+
