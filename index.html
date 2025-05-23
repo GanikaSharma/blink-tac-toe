@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blink Tac Toe</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blink Tac Toe</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Blink Tac Toe 🎮</h1>
 
-  <h1>Blink Tac Toe 🎮</h1>
+    <section id="category-selection">
+      <h2>Select Emoji Category</h2>
+      <div class="player-selection">
+        <label
+          >Player 1:
+          <select id="player1-category"></select>
+        </label>
+        <label
+          >Player 2:
+          <select id="player2-category"></select>
+        </label>
+      </div>
+      <button id="start-game">Start Game</button>
+    </section>
 
-  <section id="category-selection">
-    <h2>Select Emoji Category</h2>
-    <div class="player-selection">
-      <label>Player 1:
-        <select id="player1-category"></select>
-      </label>
-      <label>Player 2:
-        <select id="player2-category"></select>
-      </label>
-    </div>
-    <button id="start-game">Start Game</button>
-  </section>
+    <section id="game-section" style="display: none">
+      <h2 id="turn-indicator">Player 1's Turn</h2>
+      <div id="board" class="board"></div>
+      <div id="message"></div>
+      <button id="restart-btn" style="display: none">Play Again</button>
+    </section>
 
-  <section id="game-section" style="display: none;">
-    <h2 id="turn-indicator">Player 1's Turn</h2>
-    <div id="board" class="board"></div>
-    <div id="message"></div>
-    <button id="restart-btn" style="display:none;">Play Again</button>
-  </section>
+    <section id="help">
+      <h3>Help</h3>
+      <p id="instructions">
+        Choose a category. Take turns placing emojis. You can only have 3 on
+        board. The oldest disappears when placing a 4th. Make a line of 3 to
+        win!
+      </p>
+    </section>
 
-  <section id="help">
-    <h3>Help</h3>
-    <p>Choose a category. Take turns placing emojis. You can only have 3 on board. The oldest disappears when placing a 4th. Make a line of 3 to win!</p>
-  </section>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
