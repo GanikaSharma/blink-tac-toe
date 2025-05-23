@@ -105,8 +105,16 @@ function handleCellClick(event) {
     document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
     document.getElementById("message").style.color = currentPlayer === 1 ? "#00ffcc" : "#00ffcc";
     gameActive = false;
-    document.getElementById('exit-btn').style.display = 'none';
+    document.getElementById('exit-btn').style.display = 'none';
     document.getElementById("restart-btn").style.display = 'block';
+
+    // 🎉 Confetti celebration!
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
     return;
   }
 
