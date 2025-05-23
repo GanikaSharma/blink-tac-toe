@@ -186,24 +186,17 @@ function handleCellClick(event) {
 }
 
 function checkWinner(player) {
-  const playerCells = board
-    .map((val, idx) => (val && val.player === player ? idx : null))
-    .filter(idx => idx !== null);
-
   const winningCombos = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-    [0, 4, 8], [2, 4, 6]           // diagonals
+    [0, 4, 8], [2, 4, 6]             // diagonals
   ];
 
-  for (let combo of winningCombos) {
-    if (combo.every(i => playerCells.includes(i))) {
-      return combo; // return the winning cells
-    }
-  }
-
-  return null;
+  return winningCombos.find(combo =>
+    combo.every(i => board[i] && board[i].player === player)
+  );
 }
+
 function restartGame() {
   board = Array(9).fill(null);
   gameActive = true;
