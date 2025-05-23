@@ -16,6 +16,7 @@ let gameActive = false;
 let mode = 'single';
 let score = { 1: 0, 2: 0 };
 let roundsPlayed = 0;
+let emojiWinStats = {};
 
 document.addEventListener('DOMContentLoaded', () => {
   const player1Select = document.getElementById('player1-category');
@@ -28,10 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Select.add(option.cloneNode(true));
   }
   document.getElementById('view-stats').addEventListener('click', () => {
+    renderStatsTable(); 
     document.getElementById('category-selection').style.display = 'none';
     document.getElementById('stats-section').style.display = 'block';
   });
-  
+
   document.getElementById('back-to-menu').addEventListener('click', () => {
     document.getElementById('stats-section').style.display = 'none';
     document.getElementById('category-selection').style.display = 'block';
@@ -262,8 +264,35 @@ function restartBoardOnly() {
 }
 
 function declareMatchWinner(winner) {
+  const emoji = selectedEmojis[winner];
+  if (emojiWinStats[emoji]) {
+    emojiWinStats[emoji]++;
+  } else {
+    emojiWinStats[emoji] = 1;
+  }
+  
   setTimeout(() => {
     alert(`🏆 Player ${winner} wins the match!`);
     resetToCategorySelection();
   }, 300);
+}
+
+function renderStatsTable() {
+  const tbody = document.querySelector('#stats-table tbody');
+  tbody.innerHTML = '';
+
+  const sortedStats = Object.entries(emojiWinStats)
+    .sort((a, b) => b[1] - a[1]);
+
+  sortedStats.forEach(([emoji, count]) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td style="font-size: 1.5rem;">${emoji}</td><td>${count}</td>`;
+    tbody.appendChild(row);
+  });
+
+  if (sortedStats.length === 0) {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td colspan="2">No data yet</td>`;
+    tbody.appendChild(row);
+  }
 }

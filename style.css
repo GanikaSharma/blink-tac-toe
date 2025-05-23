@@ -212,3 +212,55 @@ select:focus {
   gap: 12px;
   margin-top: 15px;
 }
+
+#stats-table {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+#stats-table thead {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+#stats-table thead th {
+  padding: 12px 15px;
+  user-select: none;
+}
+
+#stats-table tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+#stats-table tbody tr:hover {
+  background-color: #f0f4ff;
+}
+
+#stats-table tbody td {
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+/* Emoji cell bigger font */
+#stats-table tbody td:first-child {
+  font-size: 1.8rem;
+}
+
+/* Wins cell styling */
+#stats-table tbody td:last-child {
+  font-weight: 600;
+  color: #2575fc;
+}
