@@ -83,6 +83,11 @@ button:hover {
   box-shadow: 0 0 12px rgba(26, 140, 255, 0.8);
 }
 
+#restart-btn {
+  display: block;
+  margin: 20px auto 0;
+}
+
 select {
   background-color: #1c1c1c;
   color: white;
@@ -130,4 +135,3 @@ select:focus {
   line-height: 1.5;
   font-style: italic;
 }
-
