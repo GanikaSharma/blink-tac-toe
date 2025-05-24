@@ -142,9 +142,9 @@ function handleCellClick(event) {
     const oldCell = document.querySelector(`[data-index='${oldest.index}']`);
     oldCell.classList.add('emoji-vanish');
 
-      board[oldest.index] = null;
-      oldCell.textContent = '';
-      oldCell.classList.remove('emoji-vanish');
+    board[oldest.index] = null;
+    oldCell.textContent = '';
+    oldCell.classList.remove('emoji-vanish');
   }
 
   const emoji = selectedEmojis[currentPlayer];
@@ -228,6 +228,11 @@ function restartGame() {
   turnHistory = { 1: [], 2: [] };
   lastVanishedCell = { 1: null, 2: null };
 
+  document.querySelectorAll('#board div').forEach(cell => {
+    cell.textContent = '';
+    cell.classList.remove('winning-cell');
+  });
+
   // Hide game UI and show category selection
   document.getElementById('game-section').style.display = 'none';
   document.getElementById('category-selection').style.display = 'block';
@@ -267,10 +272,17 @@ function restartBoardOnly() {
   lastVanishedCell = { 1: null, 2: null };
   gameActive = true;
   currentPlayer = 1;
+
+  document.querySelectorAll('#board div').forEach(cell => {
+    cell.textContent = '';
+    cell.classList.remove('winning-cell');
+  });
+
   document.getElementById('message').textContent = '';
   document.getElementById('restart-btn').style.display = 'none';
   document.getElementById('exit-btn').style.display = 'inline-block';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
+  
   generateBoard();
 }
 
