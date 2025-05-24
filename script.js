@@ -142,12 +142,9 @@ function handleCellClick(event) {
     const oldCell = document.querySelector(`[data-index='${oldest.index}']`);
     oldCell.classList.add('emoji-vanish');
 
-    setTimeout(() => {
       board[oldest.index] = null;
       oldCell.textContent = '';
       oldCell.classList.remove('emoji-vanish');
-    }, 250);
-
   }
 
   const emoji = selectedEmojis[currentPlayer];
@@ -216,10 +213,13 @@ function checkWinner(player) {
     [0, 4, 8], [2, 4, 6]             // diagonals
   ];
 
+  const currentIndexes = turnHistory[player].map(entry => entry.index);
+
   return winningCombos.find(combo =>
-    combo.every(i => board[i] && board[i].player === player)
+    combo.every(i => currentIndexes.includes(i))
   );
 }
+
 
 function restartGame() {
   board = Array(9).fill(null);
