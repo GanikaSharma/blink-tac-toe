@@ -91,6 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500); // Toast lasts for 2.5s
+}
+
 function startGame() {
   const cat1 = document.getElementById('player1-category').value;
   const cat2 = document.getElementById('player2-category').value;
@@ -182,7 +192,7 @@ function handleCellClick(event) {
     });
 
     // Show winner message
-    document.getElementById("message").textContent = `Player ${currentPlayer} Wins! 🎉`;
+    document.getElementById("message").textContent = `Player ${currentPlayer} Wins this round! 🎉`;
     document.getElementById("message").style.color = "#00ffcc";
 
     // Update score
@@ -208,8 +218,8 @@ function handleCellClick(event) {
     // Confetti
     setTimeout(() => {
       confetti({
-        particleCount: 150,
-        spread: 70,
+        particleCount: 250,
+        spread: 100,
         origin: { y: 0.6 }
       });
     }, 100);
@@ -310,12 +320,13 @@ function declareMatchWinner(winner) {
   } else {
     emojiWinStats[emoji] = 1;
   }
+
   localStorage.setItem('emojiWinStats', JSON.stringify(emojiWinStats));
+  showToast(`🏆 Player ${winner} wins the match!`);
 
   setTimeout(() => {
-    alert(`🏆 Player ${winner} wins the match!`);
     resetToCategorySelection();
-  }, 300);
+  }, 2500); // let toast + sound + confetti finish
 }
 
 function renderStatsTable() {
