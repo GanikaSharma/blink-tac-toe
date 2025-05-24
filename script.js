@@ -19,6 +19,12 @@ let roundsPlayed = 0;
 let emojiWinStats = {};
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Load leaderboard data from localStorage
+  const storedStats = localStorage.getItem('emojiWinStats');
+  if (storedStats) {
+    emojiWinStats = JSON.parse(storedStats);
+  }
+
   const player1Select = document.getElementById('player1-category');
   const player2Select = document.getElementById('player2-category');
   const startBtn = document.getElementById('start-game');
@@ -34,9 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('stats-section').style.display = 'block';
   });
 
+  // Back to menu button
   document.getElementById('back-to-menu').addEventListener('click', () => {
     document.getElementById('stats-section').style.display = 'none';
     document.getElementById('category-selection').style.display = 'block';
+  });
+
+  // Reset leaderboard button
+  document.getElementById('reset-stats').addEventListener('click', () => {
+    const confirmReset = confirm("This will clear all emoji win stats. Continue?");
+    if (confirmReset) {
+      emojiWinStats = {};
+      localStorage.removeItem('emojiWinStats');
+      renderStatsTable();
+    }
   });
 
   startBtn.addEventListener('click', startGame);
@@ -282,7 +299,7 @@ function restartBoardOnly() {
   document.getElementById('restart-btn').style.display = 'none';
   document.getElementById('exit-btn').style.display = 'inline-block';
   document.getElementById('turn-indicator').textContent = `Player ${currentPlayer}'s Turn`;
-  
+
   generateBoard();
 }
 
@@ -293,6 +310,7 @@ function declareMatchWinner(winner) {
   } else {
     emojiWinStats[emoji] = 1;
   }
+  localStorage.setItem('emojiWinStats', JSON.stringify(emojiWinStats));
 
   setTimeout(() => {
     alert(`🏆 Player ${winner} wins the match!`);
@@ -305,7 +323,8 @@ function renderStatsTable() {
   tbody.innerHTML = '';
 
   const sortedStats = Object.entries(emojiWinStats)
-    .sort((a, b) => b[1] - a[1]);
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5); // Show only top 5
 
   sortedStats.forEach(([emoji, count]) => {
     const row = document.createElement('tr');
