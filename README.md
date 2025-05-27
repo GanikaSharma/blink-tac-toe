@@ -2,7 +2,7 @@
 
 Blink Tac Toe is a modern, emoji-powered twist on the classic Tic Tac Toe game — complete with sound effects, vanishing moves, and a persistent emoji leaderboard!
 
-🔗 **Live Demo:** _link coming soon_
+🔗 **Live Demo:** https://ganikasharma.github.io/blink-tac-toe/
 
 ---
 
